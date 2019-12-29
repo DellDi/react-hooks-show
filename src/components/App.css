@@ -44,11 +44,10 @@
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
+  justify-content: flex-start;
   width: 90%;
   margin: 0 auto;
 }
-
-
 
 .add-movies {
   text-align: center;
@@ -63,12 +62,14 @@
 .movie {
   /* padding: 5px 25px 10px 25px; */
   flex: 1;
-  box-shadow:  0 0 5px rgb(218, 206, 213);
-  max-width: 25%;
+  box-shadow: 0 0 5px rgb(218, 206, 213);
+  padding: 5px 25px 10px 25px;
+  margin: 5px;
+  max-width: 22%;
 }
 
-.movie h2{
-  width: 100px;
+.movie h2 {
+  width: 100%;
   margin: 5px 0;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -96,7 +97,7 @@ input[type="submit"] {
   background-color: transparent;
   color: black;
   border: 1px solid black;
-  width: 80px;
+  width: 15%;
   margin-left: 5px;
   cursor: pointer;
 }
@@ -107,19 +108,77 @@ input[type="submit"]:hover {
   color: antiquewhite;
 }
 
-
 .search>input[type="text"] {
   width: 40%;
   min-width: 170px;
 }
 
-@media screen and (min-width: 694px) and (max-width: 915px) {
+/* new css for Loading component */
+
+.container-shadow {
+  display: flex;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+.container-shadow .shadow-loading {
+  z-index: 1000;
+  width: 100px;
+  height: 100px;
+  border-top: 6px solid #0C92EE;
+  border-radius: 50%;
+  border-color: #6495ED #1E90FF #6495ED;
+  box-sizing: border-box;
+  line-height: 100px;
+  text-align: center;
+  animation: rotated 1s linear 0s infinite normal both;
+}
+@keyframes rotated {
+  from {
+  transform: rotate(0deg);
+}
+to {
+  transform: rotate(360deg);
+}
+
+}
+.container-shadow .shadow-loading span {
+  display: block;
+  color: antiquewhite;
+  animation: rotated 1s linear 0s infinite reverse both;
+}
+.container-shadow .shadow-loading:before,
+.container-shadow .shadow-loading:after {
+  content: "";
+  position: absolute;
+  top: -6px;
+  left: 0;
+  border-top: 6px solid #1E90FF;
+  height: 100px;
+  width: 100px;
+  box-sizing: border-box;
+  border-radius: 50%;
+  transform: rotate(120deg);
+}
+.container-shadow .shadow-loading:after {
+  transform: rotate(240deg);
+  border-color: #1E90FF;
+}
+
+
+@media screen and (min-width: 1061px) and (max-width: 1562px) {
   .movie {
     max-width: 33%;
   }
 }
 
-@media screen and (min-width: 652px) and (max-width: 693px) {
+@media screen and (min-width: 652px) and (max-width: 1060px) {
   .movie {
     max-width: 50%;
   }
@@ -129,6 +188,6 @@ input[type="submit"]:hover {
 @media screen and (max-width: 651px) {
   .movie {
     max-width: 100%;
-    margin: auto;
+    margin: 5px auto;
   }
 }
