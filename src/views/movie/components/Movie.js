@@ -1,4 +1,5 @@
 import React from 'react';
+import ShareBar from "./ShareBar";
 const DEFAULT_PLACEHOLDER_IMAGE =
   "https://m.media-amazon.com/images/M/MV5BMTczNTI2ODUwOF5BMl5BanBnXkFtZTcwMTU0NTIzMw@@._V1_SX300.jpg";
 
@@ -10,7 +11,8 @@ const Movie = ({ movie }) => {
       <div>
         <img width="200" height="300" src={poster} alt={`The movie titled: ${movie.Title}`} />
       </div>
-      <p>{movie.Year}</p>
+      <p>{movie.Year}年</p>
+      <ShareBar/>
     </div>
   )
 }

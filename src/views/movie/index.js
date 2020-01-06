@@ -1,10 +1,9 @@
 import React, { useEffect, useReducer } from 'react';
-// import logo from '../logo.svg';
-import Header from "./Header";
-import Movie from "./Movie";
-import Search from "./Search";
-import Loading from "./Loading";
-import './App.css';
+import Header from "./components/Header";
+import Movie from "./components/Movie";
+import Search from "./components/Search";
+import Loading from "./components/Loading";
+import './index.css';
 
 const MOVIE_API_URL = "https://www.omdbapi.com/?s=man&apikey=4a3b711b"
 
@@ -40,7 +39,7 @@ const reducer = (state, action) => {
   }
 }
 
-const App = () => {
+const MovieIndex = () => {
   const [state, dispatch] = useReducer(reducer, initialState)
   useEffect(() => {
     fetch(MOVIE_API_URL)
@@ -144,4 +143,4 @@ const App = () => {
 //   );
 // }
 
-export default App;
+export default MovieIndex;
