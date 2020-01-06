@@ -1,41 +1,13 @@
-import React, { Component } from 'react';
-// import Movies from '../views/movie'
-
-import Loadable from "react-loadable"  //按需加载
-//按需加载
-const Loading = () => {
-    return <div>loading.....</div>
+import React, { Component } from "react";
+import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
+import RouterView from "./routerView";
+import { routes } from "./routesConfig";
+function RootRouter() {
+  return (
+    <BrowserRouter>
+      <RouterView routes={routes}></RouterView>
+    </BrowserRouter>
+  );
 }
-const Movies = Loadable({
-    loader: () => import("../views/movie"),
-    loading: Loading,
-})
 
-export const routes= [
-    {
-        path: '/',
-        redirect: '/movies'
-    },
-    {
-        path: '/movies',
-        component: Movies
-    }
-    // {
-    //     path: '/index',
-    //     component: Index,
-    //     children: [
-    //         {
-    //             path: '/index/hot',
-    //             component: Hot
-    //         },
-    //         {
-    //             path: '/index/cold',
-    //             component: Cold
-    //         },
-    //         {
-    //             path: '/index',
-    //             redirect: '/index/hot'
-    //         }
-    //     ]
-    // }
-]
+export default RootRouter;

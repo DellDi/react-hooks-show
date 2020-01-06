@@ -1,15 +1,15 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import RouterView from "./router/RouterView"; // 封装的组件
-import { routes } from "./router"; // 路由表
+import RootRouter from "./router"
 
 import "./index.css"; // 初始化样式表
 // import App from './components/App';
 
 import * as serviceWorker from "./serviceWorker";
 
+
 ReactDOM.render(
-  <RouterView routes={routes} />,
+  <RootRouter />,
   document.getElementById("root")
 );
 
