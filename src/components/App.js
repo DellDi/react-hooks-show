@@ -1,83 +1,42 @@
 /*
  * @Author: Dell_Di
  * @Date: 2020-01-15 17:37:56
- * @LastEditors: Dell_Di
- * @LastEditTime: 2020-01-15 17:38:46
+ * @LastEditors  : Dell_Di
+ * @LastEditTime : 2020-01-17 14:53:59
  * @FilePath: \myReact\src\components\App.js
  */
 import React from "react";
-import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
+import { Redirect, Route, Switch } from "react-router-dom";
 
-// components
-// import Layout from "./Layout";
-
-// views
-import Error from "../views/error";
-// import Login from "../views/login";
-
-// context
-import { useUserState } from "../context/UserContext";
-
-export default function App() {
-  // global
-  var { isAuthenticated } = useUserState();
-
+function App(props) {
+  let { routes } = props; // 这里就是传参过来
+  let routerArr = routes.filter(item => !item.redirect); // 非重定向的数据过滤出来
+  let redirectArr =
+    routes &&
+    routes
+      .filter(item => item.redirect)
+      .map((item, index) => (
+        <Redirect key={index} from={item.path} to={item.redirect} />
+      ));
   return (
-    <BrowserRouter>
-      <Switch>
-        <Route exact path="/" render={() => <Redirect to="/app/dashboard" />} />
-        <Route
-          exact
-          path="/app"
-          render={() => <Redirect to="/app/dashboard" />}
-        />
-        {/* <PrivateRoute path="/app" component={Layout} />
-        <PublicRoute path="/login" component={Login} /> */}
-        <Route component={Error} />
-      </Switch>
-    </BrowserRouter>
+    <Switch>
+      {routerArr &&
+        routerArr
+          .map((item, index) => {
+            return (
+              <Route
+                key={index}
+                path={item.path}
+                render={props => {
+                  /*注意这里传props里面才能进行下面的history使用,child是传的二级路由的*/
+                  return <item.component {...props} child={item.children} />;
+                }}
+              />
+            );
+          })
+          .concat(redirectArr) //将其合并
+      }
+    </Switch>
   );
-
-  // #######################################################################
-
-//   function PrivateRoute({ component, ...rest }) {
-//     return (
-//       <Route
-//         {...rest}
-//         render={props =>
-//           isAuthenticated ? (
-//             React.createElement(component, props)
-//           ) : (
-//             <Redirect
-//               to={{
-//                 pathname: "/login",
-//                 state: {
-//                   from: props.location,
-//                 },
-//               }}
-//             />
-//           )
-//         }
-//       />
-//     );
-//   }
-
-//   function PublicRoute({ component, ...rest }) {
-//     return (
-//       <Route
-//         {...rest}
-//         render={props =>
-//           isAuthenticated ? (
-//             <Redirect
-//               to={{
-//                 pathname: "/",
-//               }}
-//             />
-//           ) : (
-//             React.createElement(component, props)
-//           )
-//         }
-//       />
-//     );
-//   }
 }
+export default App;

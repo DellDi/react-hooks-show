@@ -1,15 +1,20 @@
+/*
+ * @Author: Dell_Di
+ * @Date: 2020-01-06 09:08:34
+ * @LastEditors  : Dell_Di
+ * @LastEditTime : 2020-01-17 15:09:09
+ * @FilePath: \myReact\src\index.js
+ */
 import React from "react";
 import ReactDOM from "react-dom";
-import RootRouter from "./router"
+import RouterView from './router'
 
 import "./index.css"; // 初始化样式表
-// import App from './components/App';
 
 import * as serviceWorker from "./serviceWorker";
 
-
 ReactDOM.render(
-  <RootRouter />,
+  <RouterView />,
   document.getElementById("root")
 );
 
